@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 const skills = [
   {
-    label: "Frontend",
+    label: "Front End",
     icon: <Code className="w-5 h-5 text-blue-600" />,
     items: [
       "React.js",
@@ -17,7 +17,7 @@ const skills = [
     ],
   },
   {
-    label: "Backend",
+    label: "Back End",
     icon: <Server className="w-5 h-5 text-green-600" />,
     items: [
       "PHP",

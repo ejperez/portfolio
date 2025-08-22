@@ -19,7 +19,7 @@ export default function Header() {
             Full Stack Developer
           </h2>
           <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
-            Crafting seamless digital experiences from backend to frontend.
+            Crafting seamless digital experiences from back end to front end.
             Passionate about clean code, scalable architecture, and innovative
             solutions.
           </p>
@@ -29,7 +29,14 @@ export default function Header() {
               className="bg-blue-600 hover:bg-blue-700 text-white"
               asChild
             >
-              <Link to="contact">
+              <Link
+                to="contact"
+                activeClass="active"
+                spy={true}
+                smooth={true}
+                duration={500}
+                offset={-60}
+              >
                 <Mail className="w-4 h-4 mr-2" />
                 Get In Touch
               </Link>

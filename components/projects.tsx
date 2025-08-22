@@ -102,7 +102,7 @@ export default function Projects() {
               <CardTitle className="mb-2">Analytics Dashboard</CardTitle>
               <CardDescription className="mb-4">
                 Real-time analytics dashboard with interactive charts and data
-                visualization. Built with React, D3.js, and Python backend for
+                visualization. Built with React, D3.js, and Python back end for
                 data processing.
               </CardDescription>
               <div className="flex flex-wrap gap-2 mb-4">

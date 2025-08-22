@@ -9,56 +9,121 @@ const menuItems = ["About", "Skills", "Experience", "Projects", "Contact"];
 export default function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const menu = useRef<HTMLDivElement | null>(null);
+  const mobileMenu = useRef<HTMLDivElement | null>(null);
+  const nav = useRef<HTMLElement | null>(null);
+  const home = useRef<HTMLDivElement | null>(null);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  /* Fix for short last section bug */
   useEffect(() => {
-    let justReachedBottom = false;
+    const modifySelectMenuItem = (menu: HTMLDivElement) => {
+      if (!menu) {
+        return;
+      }
 
-    const detectEndOfPage = () => {
       const scrolledTo = Math.ceil(window.scrollY + window.innerHeight);
       const isBottomReached = document.body.scrollHeight === scrolledTo;
-      const currentMenu = menu?.current as HTMLDivElement;
-      const lastItem = currentMenu.children[currentMenu.children.length - 1];
-      const secondToLastItem =
-        currentMenu.children[currentMenu.children.length - 2];
+      const lastItem = menu.children[menu.children.length - 1];
+      const secondToLastItem = menu.children[menu.children.length - 2];
 
       if (isBottomReached) {
-        Array.from(currentMenu.children).forEach((item: Element, index) => {
+        Array.from(menu.children).forEach((item: Element) => {
           item.classList.remove("active");
         });
 
         lastItem.classList.add("active");
-        justReachedBottom = true;
+        menu.dataset.reachedBottom = "1";
       } else {
         lastItem.classList.remove("active");
 
-        if (justReachedBottom) {
-          justReachedBottom = false;
+        if (menu.dataset.reachedBottom === "1") {
+          menu.dataset.reachedBottom = "0";
           secondToLastItem.classList.add("active");
         }
       }
     };
 
-    window.addEventListener("scroll", detectEndOfPage);
+    const modifyNav = () => {
+      if (!nav) {
+        return;
+      }
 
-    return () => window.removeEventListener("scroll", detectEndOfPage);
+      const backgroundClasses = [
+        "bg-slate-900/80",
+        "backdrop-blur-md",
+        "border-b",
+        "border-slate-700",
+      ];
+      const currentNav = nav?.current as HTMLElement;
+
+      if (window.scrollY === 0) {
+        currentNav.classList.remove(...backgroundClasses);
+      } else {
+        currentNav.classList.add(...backgroundClasses);
+      }
+    };
+
+    const modifyHome = () => {
+      if (!home) {
+        return;
+      }
+
+      const currentHome = home?.current as HTMLElement;
+
+      if (window.scrollY === 0) {
+        currentHome.classList.add("opacity-0");
+        currentHome.classList.remove("opacity-100");
+      } else {
+        currentHome.classList.add("opacity-100");
+        currentHome.classList.remove("opacity-0");
+      }
+    };
+
+    const detectEndOfPage = () => {
+      modifySelectMenuItem(menu.current as HTMLDivElement);
+      modifySelectMenuItem(mobileMenu.current as HTMLDivElement);
+    };
+
+    const detectStartOfPage = () => {
+      modifyNav();
+      modifyHome();
+    };
+
+    window.addEventListener("scroll", detectEndOfPage);
+    window.addEventListener("scroll", detectStartOfPage);
+
+    detectEndOfPage();
+    detectStartOfPage();
+
+    return () => {
+      window.removeEventListener("scroll", detectEndOfPage);
+      window.removeEventListener("scroll", detectStartOfPage);
+    };
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50">
+    <nav
+      className="fixed top-0 w-full z-50 transition-all duration-300"
+      ref={nav}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="font-bold text-xl text-slate-300 hover:text-white">
+          <div
+            className="font-bold text-xl text-slate-300 hover:text-white opacity-0 transition-opacity duration-300"
+            ref={home}
+          >
             <Link to="home" spy={true} smooth={true} duration={500}>
-              Home
+              EJP
             </Link>
           </div>
 
-          <div className="hidden md:flex space-x-8" ref={menu}>
+          <div
+            className="hidden md:flex space-x-8"
+            ref={menu}
+            data-reached-bottom="0"
+          >
             {menuItems.map((item) => (
               <Link
                 key={item}
@@ -90,7 +155,11 @@ export default function Nav() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-slate-900 border-b border-slate-700 shadow-lg">
-            <div className="px-4 py-2 space-y-1" ref={menu}>
+            <div
+              className="px-4 py-2 space-y-1"
+              ref={mobileMenu}
+              data-reached-bottom="0"
+            >
               {menuItems.map((item) => (
                 <Link
                   key={item}
