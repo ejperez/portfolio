@@ -5,7 +5,7 @@ export default function About() {
         <h2 className="text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white">
           About Me
         </h2>
-        <div className="text-center text-md text-slate-300 mb-6">
+        <div className="text-center text-sm text-slate-300 mb-6">
           <p>
             I'm a Full Stack Developer who thrives on turning ideas into
             impactful solutions that solve real-world problems. With a passion

@@ -7,7 +7,6 @@ import Skills from "@/components/skills";
 import Experience from "@/components/experience";
 import About from "@/components/about";
 import Projects from "@/components/projects";
-import Footer from "@/components/footer";
 import Contacts from "@/components/contact";
 
 export default function Portfolio() {
@@ -48,7 +47,6 @@ export default function Portfolio() {
         <Experience />
         <Projects />
         <Contacts />
-        <Footer />
       </div>
     </div>
   );
