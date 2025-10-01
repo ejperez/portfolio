@@ -23,7 +23,6 @@ export default function Header() {
         <div className="flex justify-center gap-4 mb-8">
           <Button
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white"
             asChild
           >
             <Link
