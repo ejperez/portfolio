@@ -1,3 +1,5 @@
+import nextConfig from "../next.config.mjs";
+
 const hobbyProjects = [
   {
     id: 1,
@@ -65,7 +67,7 @@ export default function HobbyProjects() {
             >
               <div className="relative h-40 overflow-hidden">
                 <img
-                  src={project.image || "/placeholder.svg"}
+                  src={`${nextConfig.basePath}${project.image}` || "/placeholder.svg"}
                   alt={project.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
