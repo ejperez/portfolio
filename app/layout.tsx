@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import nextConfig from "../next.config.mjs";
 
 export const metadata: Metadata = {
   title: "EJ Perez | Full Stack Developer",
@@ -18,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.png" sizes="any" />
+        <link
+          rel="icon"
+          href={`${nextConfig.basePath}/favicon.png`}
+          sizes="any"
+        />
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         {children}
