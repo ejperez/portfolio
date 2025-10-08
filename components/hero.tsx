@@ -1,5 +1,7 @@
 "use client";
 
+import nextConfig from "../next.config.mjs";
+
 export default function Hero() {
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -8,7 +10,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-      <div className="absolute inset-0 bg-[url('/abstract-geometric-pattern.png')] opacity-5 bg-cover bg-center" />
+      <div className={`absolute inset-0 bg-[url('${nextConfig.basePath}/abstract-geometric-pattern.png')] opacity-5 bg-cover bg-center`} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">
