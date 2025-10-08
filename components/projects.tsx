@@ -97,6 +97,14 @@ const projects = [
     image: "/voyado.png",
     link: "https://voyado.com",
   },
+  {
+    id: 13,
+    name: "STINAA.J",
+    description:
+      "Contributed in creating new sections and improving the product listing page. Made at ROIROI.",
+    image: "/stinaaj.png",
+    link: "https://stinaaj.com",
+  },
 ];
 
 export default function Projects() {
@@ -122,7 +130,8 @@ export default function Projects() {
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={
-                    `${nextConfig.basePath}${project.image}` || "/placeholder.svg"
+                    `${nextConfig.basePath}${project.image}` ||
+                    "/placeholder.svg"
                   }
                   alt={project.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
